@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logout-btn, .list-cerita, .buat-baru, .top-btn, .login-btn{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    text-decoration: none;
+    background: #28a745;
+    color: white;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px;
+}
+
+.skip-to-content {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    background: #28a745;
+    color: white;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px;
+    position: absolute !important;
+    /* height: 1px;
+    width: 1px; */
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+  
+.skip-to-content:focus {
+    position: unset !important;
+}
+
+.stories{
+    width: 80vw;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 1rem;
+
+    @media screen and (max-width: 480px) {
+        width: 100%;
+        padding: 0 1rem;
+        grid-template-columns: repeat(1, auto);
+    }
+
+    .story{
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background-color: white;
+        border-radius: .5rem;
+        box-shadow: 0 0 20px -2px rgb(0, 0, 0, .2);
+
+        .img{
+            display: flex;
+            overflow: hidden;
+
+            &:hover{
+                & img{
+                    transform: scale(1.1);
+                }
+            }
+
+            & img{
+                transition: all .2s;
+                width: 100%;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+        }
+
+        .text{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+            .story-id{
+                font-weight: bold;
+                font-size: .75rem;
+            }
+
+            .story-desc{
+                margin-top: 1rem;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-clamp: 3;
+                -webkit-line-clamp: 3;
+            }
+        }
+    }
+}
