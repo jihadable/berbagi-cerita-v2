@@ -4,6 +4,26 @@
     box-sizing: border-box;
 }
 
+.notifs{
+    margin: 2rem auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+
+    & button{
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        background: #28a745;
+        color: white;
+        border-radius: 5px;
+        width: fit-content;
+        padding: 5px;
+    }
+}
+
 .logout-btn, .list-cerita, .buat-baru, .top-btn, .login-btn{
     display: flex;
     text-align: center;
@@ -30,8 +50,6 @@
     width: fit-content;
     padding: 5px;
     position: absolute !important;
-    /* height: 1px;
-    width: 1px; */
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
 }

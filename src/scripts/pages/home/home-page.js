@@ -13,7 +13,17 @@ export default class HomePage {
         
         return `
             <h1 id="top">Berbagi Cerita</h1>
-            ${token.value ? `<button class="logout-btn">Logout</button><a href="/#/stories" class="list-cerita">List cerita</a><a href="/#/add" class="buat-baru">Buat cerita baru</a>` : `<a class="login-btn" href="/#/login">Login untuk buat cerita baru</a>`}
+            ${
+                token.value ? 
+                `<button class="logout-btn">Logout</button>
+                <div class="notifs">
+                    <button class="sub">Subscribe Notif</button>
+                    <button class="unsub">Unsubscribe Notif</button>
+                </div>
+                <a href="/#/stories" class="list-cerita">List cerita</a>
+                <a href="/#/add" class="buat-baru">Buat cerita baru</a>` 
+                : 
+                `<a class="login-btn" href="/#/login">Login untuk buat cerita baru</a>`}
         `
     }
    
@@ -22,6 +32,7 @@ export default class HomePage {
             view: this
         })
 
+        this.#presenter.subNUnsub()
         this.#presenter.logoutMethod()
     }
 }

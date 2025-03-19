@@ -1,3 +1,5 @@
+import { Notif } from "../../notifs";
+
 export default class HomePresenter {
     #model;
     #view;
@@ -5,6 +7,11 @@ export default class HomePresenter {
     constructor({ model, view }) {
         this.#model = model;
         this.#view = view;
+    }
+
+    subNUnsub(){
+        document.querySelector('.sub').addEventListener('click', Notif.subscribe);
+        document.querySelector('.unsub').addEventListener('click', Notif.unsubscribe);
     }
 
     logoutMethod(){

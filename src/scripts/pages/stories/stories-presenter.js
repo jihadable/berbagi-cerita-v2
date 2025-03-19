@@ -1,5 +1,6 @@
 import { cameraStream } from "../../data/stream";
 import { token } from "../../data/token";
+import { Notif } from "../../notifs";
 
 export default class StoriesPresenter {
     #model;
@@ -47,6 +48,11 @@ export default class StoriesPresenter {
         this.#model.forEach(story => {
             createMap(story.id, story.lat, story.lon)
         })
+    }
+
+    subNUbsub(){
+        document.querySelector('.sub').addEventListener('click', Notif.subscribe);
+        document.querySelector('.unsub').addEventListener('click', Notif.unsubscribe);
     }
 
     logoutMethod(){

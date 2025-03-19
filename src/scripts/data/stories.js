@@ -4,7 +4,7 @@ const Story = {
     async getAllStories(){
         
         try {
-            const response = await fetch("https://story-api.dicoding.dev/v1/stories?location=1", {
+            const response = await fetch(`${process.env.API_ENDPOINT}/stories?location=1`, {
                 headers: {
                     "Authorization": "Bearer " + token.value
                 }

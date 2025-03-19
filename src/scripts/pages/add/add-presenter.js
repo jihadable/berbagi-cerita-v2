@@ -1,5 +1,6 @@
 import { cameraStream } from "../../data/stream";
 import { token } from "../../data/token";
+import { Notif } from "../../notifs";
 
 export default class AddPresenter {
     #model;
@@ -123,6 +124,11 @@ export default class AddPresenter {
             }, 'image/jpeg', 0.7);
         });
 	}
+
+    subNUbsub(){
+        document.querySelector('.sub').addEventListener('click', Notif.subscribe);
+        document.querySelector('.unsub').addEventListener('click', Notif.unsubscribe);
+    }
 
     logoutMethod(){
         if (document.querySelector(".logout-btn")){

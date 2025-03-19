@@ -17,6 +17,10 @@ export default class StoriesPage {
                 <button class="skip-to-content">Skip to main content</button>
             </header>
             <button class="logout-btn">Logout</button>
+            <div class="notifs">
+                <button class="sub">Subscribe Notif</button>
+                <button class="unsub">Unsubscribe Notif</button>
+            </div>
             <a class="buat-baru" href="/#/add">Buat Cerita Baru</a>
             <a class="back-btn" href="/#/">Kembali ke home</a>
             <main id="main-content">
@@ -35,6 +39,7 @@ export default class StoriesPage {
             view: this,
         })
 
+        this.#presenter.subNUnsub()
         this.#presenter.skipToContent()
         this.#presenter.stopAllStreams()
         this.#presenter.logoutMethod()

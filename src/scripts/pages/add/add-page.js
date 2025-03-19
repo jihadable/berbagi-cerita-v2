@@ -7,6 +7,10 @@ export default class AddPage {
         return `
             <h1>Buat Cerita Baru</h1>
             <button class="logout-btn">Logout</button>
+            <div class="notifs">
+                <button class="sub">Subscribe Notif</button>
+                <button class="unsub">Unsubscribe Notif</button>
+            </div>
             <a class="back-btn" href="/#/stories">List cerita</a>
             <a class="back-btn" href="/#/">Kembali ke home</a>
             <div class="container">
@@ -42,6 +46,7 @@ export default class AddPage {
             view: this
         });
        
+        this.#presenter.subNUbsub();
         this.#presenter.logoutMethod();
         await this.#presenter.init();
     }
