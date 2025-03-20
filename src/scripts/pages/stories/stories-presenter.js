@@ -12,6 +12,7 @@ export default class StoriesPresenter {
     }
  
     async showStories() {
+        console.log(this.#model)
         const storyElement = ({ id, description, name, photoUrl }) => {
             return `
             <div class="story">
@@ -50,7 +51,7 @@ export default class StoriesPresenter {
         })
     }
 
-    subNUbsub(){
+    subNUnsub(){
         document.querySelector('.sub').addEventListener('click', Notif.subscribe);
         document.querySelector('.unsub').addEventListener('click', Notif.unsubscribe);
     }

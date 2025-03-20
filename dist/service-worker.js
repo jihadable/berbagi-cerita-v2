@@ -10,3 +10,46 @@ self.addEventListener('push', (event) => {
      
     event.waitUntil(showNotification());
 });
+
+const CACHE_NAME = 'berbagi-cerita-v2';
+const urlsToCache = [
+    '/',
+    '/index.html',
+    '/bundle.js',
+    '/manifest.json',
+    '/assets/icon192.png',
+    '/assets/icon512.png'
+];
+
+// Install Service Worker dan Cache Aset
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(urlsToCache);
+        })
+    );
+});
+
+// Ambil dari Cache saat Offline
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
+    );
+});
+
+// Update Cache saat Service Worker diaktifkan
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cache) => {
+                    if (cache !== CACHE_NAME) {
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        })
+    );
+});

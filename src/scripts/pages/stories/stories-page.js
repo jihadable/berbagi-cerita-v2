@@ -1,5 +1,5 @@
-import Story from "../../data/stories";
 import { cameraStream } from "../../data/stream";
+import { IndexedDB } from "../../indexedDB";
 import StoriesPresenter from "./stories-presenter";
 
 export default class StoriesPage {
@@ -32,7 +32,10 @@ export default class StoriesPage {
     }
    
     async afterRender() {
-        const stories = await Story.getAllStories()
+        if (navigator.onLine){
+            await IndexedDB.syncStories()
+        }
+        const stories = await IndexedDB.getAllStories()
 
         this.#presenter = new StoriesPresenter({
             model: stories,
