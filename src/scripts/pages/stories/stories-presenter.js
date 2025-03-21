@@ -12,7 +12,6 @@ export default class StoriesPresenter {
     }
  
     async showStories() {
-        console.log(this.#model)
         const storyElement = ({ id, description, name, photoBlob }) => {
             const imageUrl = URL.createObjectURL(photoBlob)
 

@@ -22,20 +22,17 @@ export const IndexedDB = {
         }
       
         await tx.done;
-        console.log('Story disimpan di IndexedDB');
     },
     
     async syncStories() {
         const stories = await Story.getAllStories()
+        console.log(stories)
         await this.saveStories(stories)
-    
-        console.log("Sync berhasil")
     },
 
     async saveStory(story) {
         const db = await dbPromise;
         await db.put('stories', story);
-        console.log('Produk disimpan:', story);
     },
     
     async getAllStories() {
@@ -46,6 +43,5 @@ export const IndexedDB = {
     async deleteStory(id) {
         const db = await dbPromise;
         await db.delete('stories', id);
-        console.log(`Cerita dengan id ${id} dihapus.`);
     }
 }
