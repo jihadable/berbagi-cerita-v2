@@ -1,5 +1,6 @@
 import { cameraStream } from "../../data/stream";
 import { token } from "../../data/token";
+import { IndexedDB } from "../../indexedDB";
 import { Notif } from "../../notifs";
 
 export default class StoriesPresenter {
@@ -50,6 +51,10 @@ export default class StoriesPresenter {
         this.#model.forEach(story => {
             createMap(story.id, story.lat, story.lon)
         })
+    }
+
+    clearData(){
+        document.querySelector(".clear-indexedDB").addEventListener("click", IndexedDB.clearStories)
     }
 
     subNUnsub(){

@@ -26,7 +26,6 @@ export const IndexedDB = {
     
     async syncStories() {
         const stories = await Story.getAllStories()
-        console.log("stories: ", stories)
         await this.saveStories(stories)
     },
 
@@ -43,5 +42,13 @@ export const IndexedDB = {
     async deleteStory(id) {
         const db = await dbPromise;
         await db.delete('stories', id);
+    },
+
+    async clearStories() {
+        const db = await dbPromise;
+        const tx = db.transaction('stories', 'readwrite');
+        const store = tx.objectStore('stories');
+        await store.clear();
+        await tx.done;
     }
 }

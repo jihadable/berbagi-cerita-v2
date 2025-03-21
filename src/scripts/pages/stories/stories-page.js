@@ -21,6 +21,7 @@ export default class StoriesPage {
                 <button class="sub">Subscribe Notif</button>
                 <button class="unsub">Unsubscribe Notif</button>
             </div>
+            <button class="clear-indexedDB">Clear data</button>
             <a class="buat-baru" href="/#/add">Buat Cerita Baru</a>
             <a class="back-btn" href="/#/">Kembali ke home</a>
             <main id="main-content">
@@ -42,6 +43,7 @@ export default class StoriesPage {
             view: this,
         })
 
+        this.#presenter.clearData()
         this.#presenter.subNUnsub()
         this.#presenter.skipToContent()
         this.#presenter.stopAllStreams()

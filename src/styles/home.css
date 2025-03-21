@@ -24,7 +24,7 @@
     }
 }
 
-.logout-btn, .list-cerita, .buat-baru, .top-btn, .login-btn{
+.clear-indexedDB, .logout-btn, .list-cerita, .buat-baru, .top-btn, .login-btn{
     display: flex;
     text-align: center;
     justify-content: center;
