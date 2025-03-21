@@ -26,7 +26,7 @@ export const IndexedDB = {
     
     async syncStories() {
         const stories = await Story.getAllStories()
-        console.log(stories)
+        console.log("stories: ", stories)
         await this.saveStories(stories)
     },
 

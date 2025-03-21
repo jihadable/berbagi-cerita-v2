@@ -17,8 +17,6 @@ export const Notif = {
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
             });
-
-            // console.log('Berhasil subscribe:', JSON.stringify(subscription));
             
             await fetch(`${process.env.API_ENDPOINT}/notifications/subscribe`, {
                 method: 'POST',
