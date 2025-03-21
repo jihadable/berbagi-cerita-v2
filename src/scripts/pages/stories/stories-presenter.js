@@ -17,7 +17,7 @@ export default class StoriesPresenter {
             return `
             <div class="story">
                 <div class="img">
-                    <img src="${photoUrl}" alt="Story dari ${name}" />
+                    <img src="${URL.createObjectURL(photoUrl)}" alt="Story dari ${name}" />
                 </div>
                 <div class="text">
                     <div class="story-id">${id}</div>

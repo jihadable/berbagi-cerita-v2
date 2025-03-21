@@ -1,4 +1,14 @@
-import { token } from "./token"
+import { token } from "./token";
+
+async function fetchImageAsBlob(url) {
+    try {
+        const response = await fetch(url);
+        return await response.blob();
+    } catch (error) {
+        console.error('Gagal mengambil gambar:', error);
+        return null;
+    }
+}
 
 const Story = {
     async getAllStories(){
@@ -10,8 +20,12 @@ const Story = {
                 }
             })
             const { listStory } = await response.json()
-            
-            return listStory
+
+            return listStory.map(async(story) => {
+                story.photoUrl = await fetchImageAsBlob(story.photoUrl)
+
+                return story
+            })
         } catch(error){
             console.log(error)
         }

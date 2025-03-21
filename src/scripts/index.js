@@ -6,8 +6,7 @@ import App from './app.js';
 async function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         try {
-            const registration = await navigator.serviceWorker.register('./service-worker.js');
-            console.log('Service Worker terdaftar:', registration);
+            await navigator.serviceWorker.register('./service-worker.js');
         } catch (error) {
             console.error('Gagal mendaftarkan Service Worker:', error);
         }
