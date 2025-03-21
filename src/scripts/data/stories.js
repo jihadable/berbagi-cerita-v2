@@ -12,7 +12,6 @@ async function fetchImageAsBlob(url) {
 
 const Story = {
     async getAllStories(){
-        
         try {
             const response = await fetch(`${process.env.API_ENDPOINT}/stories?location=1`, {
                 headers: {
@@ -21,13 +20,15 @@ const Story = {
             })
             const { listStory } = await response.json()
 
-            const stories = await Promise.all(listStory.map(async(story) => {
-                story.photoUrl = await fetchImageAsBlob(story.photoUrl);
-
+            const storiesWithBlob = await Promise.all(listStory.map(async (story) => {
+                if (story.photoUrl) {
+                    story.photoBlob = await fetchImageAsBlob(story.photoUrl);
+                    delete story.photoUrl; // Hapus URL asli
+                }
                 return story;
             }));
 
-            return stories;
+            return storiesWithBlob;
         } catch(error){
             console.log(error)
         }

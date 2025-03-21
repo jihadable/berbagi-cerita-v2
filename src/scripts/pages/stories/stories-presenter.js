@@ -13,8 +13,8 @@ export default class StoriesPresenter {
  
     async showStories() {
         console.log(this.#model)
-        const storyElement = ({ id, description, name, photoUrl }) => {
-            const imageUrl = URL.createObjectURL(photoUrl)
+        const storyElement = ({ id, description, name, photoBlob }) => {
+            const imageUrl = URL.createObjectURL(photoBlob)
 
             return `
             <div class="story">
