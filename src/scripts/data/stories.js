@@ -21,11 +21,13 @@ const Story = {
             })
             const { listStory } = await response.json()
 
-            return listStory.map(async(story) => {
-                story.photoUrl = await fetchImageAsBlob(story.photoUrl)
+            const stories = await Promise.all(listStory.map(async(story) => {
+                story.photoUrl = await fetchImageAsBlob(story.photoUrl);
 
-                return story
-            })
+                return story;
+            }));
+
+            return stories;
         } catch(error){
             console.log(error)
         }
