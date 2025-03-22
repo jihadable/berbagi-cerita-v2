@@ -1,14 +1,23 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 module.exports = {
     entry: './src/scripts/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: '[name].[contenthash].js',
+        clean: true
     },
     mode: 'production',
+    optimization: {
+        usedExports: true,
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
     module: {
         rules: [
             {
@@ -33,9 +42,21 @@ module.exports = {
     plugins: [
         new Dotenv(),
         new HtmlWebpackPlugin({
-            template: './dist/index.html',
+            template: './src/index.html',
             filename: 'index.html',
-        })
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: './src/scripts/manifest.json', to: 'manifest.json' },
+                { from: './src/scripts/service-worker.js', to: 'service-worker.js' },
+                { from: './src/assets/icon192.png', to: 'assets/icon192.png' },
+                { from: './src/assets/icon512.png', to: 'assets/icon512.png' },
+            ],
+        }),
+        new WebpackAssetsManifest({
+            output: 'asset-manifest.json',
+            writeToDisk: true,
+        }),
     ],
     devServer: {
         static: './dist',

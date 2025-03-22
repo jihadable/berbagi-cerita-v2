@@ -3,19 +3,15 @@ import "../styles/home.css";
 import "../styles/register-login-form.css";
 import App from './app.js';
 
-async function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        try {
-            await navigator.serviceWorker.register('./service-worker.js');
-        } catch (error) {
-            console.error('Gagal mendaftarkan Service Worker:', error);
-        }
-    } else {
-        console.log('Service Worker tidak didukung di browser ini.');
-    }
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+    .then((registration) => {
+        console.log('Service Worker terdaftar dengan skop:', registration.scope);
+    })
+    .catch((error) => {
+        console.error('Pendaftaran Service Worker gagal:', error);
+    });
 }
-
-registerServiceWorker()
 
 document.addEventListener('DOMContentLoaded', async () => {
     const content = document.querySelector('#content');

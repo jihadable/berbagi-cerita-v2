@@ -12,23 +12,30 @@ self.addEventListener('push', (event) => {
 });
 
 const CACHE_NAME = 'berbagi-cerita-v2';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/bundle.js',
-    '/manifest.json',
-    '/assets/icon192.png',
-    '/assets/icon512.png'
-];
+const getAssets = async () => {
+    const response = await fetch('/asset-manifest.json');
+    const assets = await response.json();
+    return [
+        '/',
+        '/index.html',
+        `/${assets['main.js']}`, // Ambil nama bundle.js secara dinamis
+        '/manifest.json',
+        '/assets/icon192.png',
+        '/assets/icon512.png',
+    ];
+};
 
 // Install Service Worker dan Cache Aset
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(urlsToCache);
+        getAssets().then((urlsToCache) => {
+            return caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache));
+        }).catch((error) => {
+            console.error('Gagal memuat aset:', error);
         })
     );
 });
+  
 
 // Ambil dari Cache saat Offline
 self.addEventListener('fetch', (event) => {
