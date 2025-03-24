@@ -3,6 +3,7 @@ const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/scripts/index.js',
@@ -48,7 +49,6 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: './src/scripts/manifest.json', to: 'manifest.json' },
-                { from: './src/scripts/service-worker.js', to: 'service-worker.js' },
                 { from: './src/assets/icon192.png', to: 'assets/icon192.png' },
                 { from: './src/assets/icon512.png', to: 'assets/icon512.png' },
             ],
@@ -56,6 +56,11 @@ module.exports = {
         new WebpackAssetsManifest({
             output: 'asset-manifest.json',
             writeToDisk: true,
+        }),
+        new InjectManifest({
+            swSrc: './src/scripts/service-worker.js',
+            swDest: 'service-worker.js',            
+            compileSrc: true,
         }),
     ],
     devServer: {
